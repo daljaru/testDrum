@@ -1,14 +1,9 @@
 package sma.rhythmtapper;
 
 import android.app.Activity;
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v4.content.LocalBroadcastManager;
 import android.widget.TextView;
 
 import sma.rhythmtapper.models.Difficulty;
@@ -44,7 +39,7 @@ public class HighscoreActivity extends Activity {
         //_highscoreView = (ListView)this.findViewById(R.id.highscore_list_view);
 
         //*from cj
-        LocalBroadcastManager.getInstance(this).registerReceiver(mBroadcastReceiver, new IntentFilter("DrumHitNumber"));
+        //LocalBroadcastManager.getInstance(this).registerReceiver(mBroadcastReceiver, new IntentFilter("DrumHitNumber"));
         //from cj
 
         _easyTxtView = (TextView)this.findViewById(R.id.highscore_txt_score_easy);
@@ -74,7 +69,7 @@ public class HighscoreActivity extends Activity {
     }
 
     //*from cj
-    private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
+   /* private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             String data1 = intent.getStringExtra("DrumPadNumber");
@@ -86,6 +81,6 @@ public class HighscoreActivity extends Activity {
     public void onDestroy() {
         super.onDestroy();
         LocalBroadcastManager.getInstance(this).unregisterReceiver(mBroadcastReceiver);
-    }
+    }*/
     //from cj
 }

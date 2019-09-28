@@ -13,6 +13,7 @@ import android.os.Vibrator;
 import android.support.v4.content.LocalBroadcastManager;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import sma.rhythmtapper.framework.Audio;
 import sma.rhythmtapper.framework.FileIO;
@@ -50,6 +51,10 @@ public class RTGame extends Activity implements Game {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //*from cj
+        LocalBroadcastManager.getInstance(this).registerReceiver(mBroadcastReceiver, new IntentFilter("DrumHitNumber"));
+        //from cj
 
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
@@ -153,4 +158,20 @@ public class RTGame extends Activity implements Game {
     public void setPadNumber(String padNumber){
         drumPadNumber = padNumber;
     }
+
+    //*from cj
+    private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            drumPadNumber= intent.getStringExtra("DrumPadNumber");
+            Toast.makeText(getApplicationContext(), drumPadNumber, Toast.LENGTH_LONG).show();
+        }
+    };
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(mBroadcastReceiver);
+    }
+    //from cj
 }

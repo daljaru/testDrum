@@ -16,6 +16,8 @@ public class DifficultySelectionActivity extends Activity implements View.OnClic
     private Button btnMid;
     private Button btnHard;
 
+    public String drumPadNumber;
+
     private final Difficulty _diffEasy =
             new Difficulty(Difficulty.EASY_TAG, "Spyro_Year_of_the_Dragon_Acoustic_Fields_OC_ReMix.mp3", 115f/2, 8);
     private final Difficulty _diffMid =
@@ -27,6 +29,10 @@ public class DifficultySelectionActivity extends Activity implements View.OnClic
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_difficulty_selection);
+
+        //*from cj
+        //LocalBroadcastManager.getInstance(this).registerReceiver(mBroadcastReceiver, new IntentFilter("DrumHitNumber"));
+        //from cj
 
         this.btnEasy = (Button)this.findViewById(R.id.diff_btn_easy);
         this.btnEasy.setOnClickListener(this);
@@ -59,4 +65,21 @@ public class DifficultySelectionActivity extends Activity implements View.OnClic
                 Log.e("","unexpected id!");
         }
     }
+
+    //*from cj
+    /*
+    private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            drumPadNumber= intent.getStringExtra("DrumPadNumber");
+            Toast.makeText(getApplicationContext(), drumPadNumber, Toast.LENGTH_LONG).show();
+        }
+    };
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(mBroadcastReceiver);
+    }*/
+    //from cj
 }

@@ -32,6 +32,11 @@ public class GameScreen extends Screen {
         Ready, Running, Paused, GameOver
     }
 
+    public String getdrumPadNumber(){
+        return receivedGame.getPadNumber();
+    }
+    Game receivedGame;
+
     // game and device
     private int _gameHeight;
     private int _gameWidth;
@@ -104,6 +109,7 @@ public class GameScreen extends Screen {
 
     GameScreen(Game game, Difficulty difficulty) {
         super(game);
+        receivedGame = game;
 
         _difficulty = difficulty;
         // init difficulty parameters
@@ -247,6 +253,7 @@ public class GameScreen extends Screen {
         for (int i = 0; i < len; i++) {
             TouchEvent event = touchEvents.get(i);
 
+
             if (event.type == TouchEvent.TOUCH_DOWN) {
                 if (event.y > 1500) {
                     // ball hit area
@@ -383,11 +390,8 @@ public class GameScreen extends Screen {
             }
         }
 
-        //from cj
-        if (lowestBall != null && lowestBall.y > HITBOX_CENTER - HITBOX_HEIGHT / 2 ) {
-            //여기를 변경해야함.
-        //from cj
 
+        if (lowestBall != null && lowestBall.y > HITBOX_CENTER - HITBOX_HEIGHT / 2 ) {
             balls.remove(lowestBall);
             onHit(lowestBall);
             return lowestBall.type != Ball.BallType.Skull;
@@ -636,11 +640,11 @@ public class GameScreen extends Screen {
         }
 
         g.drawRect(0, 0, _gameWidth, 100, Color.BLACK);
-
+        //Toast.makeText(getApplicationContext(), game.getPadNumber(), Toast.LENGTH_LONG).show();
         String s = "Score: " + _score +
                 "   Multiplier: " + _multiplier * (_doubleMultiplierTicker > 0 ? 2 : 1) + "x" +
-                "   Lifes remaining: " + _lifes;// +
-               // "   DrumPadNumber: "+ game.getPadNumber();
+                "   Lifes remaining: " + _lifes +
+                "   DrumPadNumber: "+ game.getPadNumber();
         g.drawString(s, 600, 80, _paintScore);
     }
 
